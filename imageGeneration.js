@@ -7,7 +7,9 @@ const canvasTxt = require('canvas-txt').default;
 async function generateImage(title, subreddit, pathToSave) {
   const canvas = createCanvas(1920, 1080);
   const ctx = canvas.getContext('2d');
+  registerFont(path.join(__dirname, './fonts/impact.ttf'), { family: 'Impact' });
   registerFont(path.join(__dirname, './fonts/impact.ttf'), { family: 'Impact Condensed' });
+  registerFont(path.join(__dirname, './fonts/impact.ttf'), { family: 'Impact Mondo' });
   // give the canvas a gradient background
   const gradient = ctx.createLinearGradient(0, 0, 0, 1080);
   gradient.addColorStop(0, '#1a1a1a');
@@ -35,7 +37,12 @@ async function generateImage(title, subreddit, pathToSave) {
   canvasTxt.fontSize = 96;
   canvasTxt.align = 'left';
 
-  canvasTxt.drawText(ctx, title, 100, canvas.height / 2 - 250, canvas.width / 2 - 200, 500);
+  let textTitle = title;
+  if (title.length > 120) {
+    textTitle = `${textTitle.substring(0, 120)}...`;
+  }
+
+  canvasTxt.drawText(ctx, textTitle, 100, canvas.height / 2 - 250, canvas.width / 2 - 200, 500);
   // write the subreddit
   ctx.fillStyle = '#FF4500';
   canvasTxt.font = 'Sans';
