@@ -17,8 +17,6 @@ exports.generateImage = function(url, pathToSave){
             const title = fullTitle.split(":")[0].trim();
             const subreddit = fullTitle.split(":")[1].trim();
             await generateImage(title, subreddit, pathToSave);
-            // quit the process
-            process.exit();
         }
         done();
     }
