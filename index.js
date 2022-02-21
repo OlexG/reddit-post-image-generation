@@ -23,5 +23,5 @@ exports.generateImage = function(url, pathToSave){
         done();
     }
   });
-  c.queue(answer.trim());
+  c.queue(url.trim());
 }
