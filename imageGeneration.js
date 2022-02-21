@@ -5,11 +5,11 @@ const fetch = require('node-fetch');
 const canvasTxt = require('canvas-txt').default;
 
 async function generateImage(title, subreddit, pathToSave) {
-  const canvas = createCanvas(1920, 1080);
-  const ctx = canvas.getContext('2d');
   registerFont(path.join(__dirname, './fonts/impact.ttf'), { family: 'Impact' });
   registerFont(path.join(__dirname, './fonts/impact.ttf'), { family: 'Impact Condensed' });
-  registerFont(path.join(__dirname, './fonts/impact.ttf'), { family: 'Impact Mondo' });
+  registerFont(path.join(__dirname, './fonts/impact.ttf'), { family: 'Impact Mono' });
+  const canvas = createCanvas(1920, 1080);
+  const ctx = canvas.getContext('2d');
   // give the canvas a gradient background
   const gradient = ctx.createLinearGradient(0, 0, 0, 1080);
   gradient.addColorStop(0, '#1a1a1a');
