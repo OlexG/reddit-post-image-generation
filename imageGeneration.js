@@ -49,7 +49,7 @@ async function generateImage(title, subreddit) {
   canvasTxt.drawText(ctx, 'r/' + subreddit, 150, 45, canvas.width / 2, 50);
   // show the canvas
   const buffer = canvas.toBuffer('image/png')
-  fs.writeFileSync('saved.png', buffer)
+  fs.writeFileSync(pathToSave, buffer)
 }
 
 module.exports = { generateImage }

@@ -1,5 +1,5 @@
 {
-  "name": "redditthumbnailgen",
+  "name": "reddit-post-image-generation",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
