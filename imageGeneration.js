@@ -24,7 +24,8 @@ async function generateImage(title, subreddit, pathToSave) {
   const subredditJson = await fetch(`https://www.reddit.com/r/${subreddit}/about.json`);
   const subredditData = await subredditJson.json();
   // get the subreddit icon
-  const subredditIcon = await loadImage(subredditData.data.icon_img);
+  const iconURL = subredditData.data.icon_img ? subredditData.data.icon_img : path.join(__dirname, './media/reddit-logo.png');
+  const subredditIcon = await loadImage(iconURL);
   // draw the subreddit icon
   ctx.drawImage(subredditIcon, 30, 30, 100, 100);
 
