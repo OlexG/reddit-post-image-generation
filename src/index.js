@@ -3,7 +3,7 @@ const { generateImage } = require("./image");
 
 exports.generateImage = function (url, pathToSave) {
 	return new Promise((resolve, reject) => {
-		const c = new Crawler({
+		new Crawler({
 			maxConnections: 10,
 			async callback(error, res, done) {
 				if (error) {
@@ -18,7 +18,6 @@ exports.generateImage = function (url, pathToSave) {
 				}
 				done();
 			},
-		});
-		c.queue(url.trim());
+		}).queue(url.trim());
 	});
 };
