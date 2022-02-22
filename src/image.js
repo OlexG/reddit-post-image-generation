@@ -45,8 +45,8 @@ async function generateImage(title, subreddit, pathToSave) {
 	canvasTxt.fontSize = 60;
 	canvasTxt.align = "left";
 	canvasTxt.drawText(ctx, `r/${subreddit}`, 150, 45, canvas.width / 2, 50);
-	const buffer = canvas.toBuffer("image/png");
-	fs.writeFileSync(pathToSave, buffer);
+
+	canvas.createPNGStream().pipe(fs.createWriteStream(pathToSave));
 }
 
 module.exports = { generateImage };
