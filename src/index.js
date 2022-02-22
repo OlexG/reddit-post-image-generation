@@ -1,5 +1,5 @@
 const Crawler = require("crawler");
-const { generateImage } = require("./imageGeneration");
+const { generateImage } = require("./image");
 
 exports.generateImage = function (url, pathToSave) {
 	// make into promise
