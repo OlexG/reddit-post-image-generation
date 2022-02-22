@@ -9,7 +9,9 @@ const fontPath = path.join(__dirname, "../fonts/impact.ttf");
 async function generateImage({ title, subreddit, icon }, pathToSave) {
 	icon = icon ? icon : logoPath;
 
-	registerFont(fontPath, { family: "Impact" });
+	for (const family in ["Impact", "Impact Condensed", "Impact Mono"]) {
+		registerFont(fontPath, { family });
+	}
 
 	const canvas = createCanvas(1920, 1080);
 	const ctx = canvas.getContext("2d");
