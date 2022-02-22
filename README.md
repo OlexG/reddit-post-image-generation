@@ -1,11 +1,15 @@
 # reddit-post-image-generation
-Generate a 1080 by 1920 image of a reddit posts that includes a title, subreddit, and subreddit logo. This was written in an hour or two so the code is....pretty bad.
+
+Generates a 1080x1920 image of a Reddit post that includes the title, subreddit, and logo.
+
+This was written in an hour or two so the code is... pretty bad.
+
 # Instructions
-import { generateImage } from 'reddit-post-image-generation'
 
-generateImage(url, pathToSaveImage)
+```js
+import { generateImage } from "reddit-post-image-generation";
 
-url is in the format https://www.reddit.com/r/{subreddit}/comments/{somedata}, you can get this by clicking on a post
+generateImage(postId, outputPath);
+```
 
-
-
+`postId` can be found in the URL of a post. For example, in `https://www.reddit.com/r/AskReddit/comments/sxu1jr/dear_nonindians_of_reddit_what_is_the_first_thing/`, the post ID is `sxu1jr`.
