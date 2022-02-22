@@ -9,10 +9,8 @@ exports.generateImage = function (url, pathToSave) {
 				if (error) {
 					reject(error);
 				} else {
-					const { $ } = res;
-					const fullTitle = $("title").text();
-					const title = fullTitle.split(":")[0].trim();
-					const subreddit = fullTitle.split(":")[1].trim();
+					const fullTitle = res.$("title").text();
+					const [title, subreddit] = fullTitle.split(":").map((s) => s.trim());
 					await generateImage(title, subreddit, pathToSave);
 					resolve();
 				}
