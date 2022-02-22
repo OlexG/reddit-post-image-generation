@@ -1,4 +1,5 @@
 const Crawler = require("crawler");
+const fetch = require("node-fetch");
 const { generateImage } = require("./image");
 
 exports.generateImage = function (url, pathToSave) {
@@ -11,7 +12,12 @@ exports.generateImage = function (url, pathToSave) {
 				} else {
 					const fullTitle = res.$("title").text();
 					const [title, subreddit] = fullTitle.split(":").map((s) => s.trim());
-					await generateImage(title, subreddit, pathToSave);
+
+					let icon = await fetch(`https://www.reddit.com/r/${subreddit}/about.json`);
+					icon = await icon.json();
+					icon = icon?.data?.icon_img;
+
+					await generateImage({ title, subreddit, icon }, pathToSave);
 					resolve();
 				}
 				done();

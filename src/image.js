@@ -1,12 +1,15 @@
 const { createCanvas, loadImage, registerFont } = require("canvas");
 const fs = require("fs");
 const path = require("path");
-const fetch = require("node-fetch");
 const canvasTxt = require("canvas-txt").default;
 
-async function generateImage(title, subreddit, pathToSave) {
-	const font = path.join(__dirname, "../fonts/impact.ttf");
-	registerFont(font, { family: "Impact" });
+const logoPath = path.join(__dirname, "../media/reddit-logo.png");
+const fontPath = path.join(__dirname, "../fonts/impact.ttf");
+
+async function generateImage({ title, subreddit, icon }, pathToSave) {
+	icon = icon ? icon : logoPath;
+
+	registerFont(fontPath, { family: "Impact" });
 
 	const canvas = createCanvas(1920, 1080);
 	const ctx = canvas.getContext("2d");
@@ -17,17 +20,9 @@ async function generateImage(title, subreddit, pathToSave) {
 	ctx.fillStyle = gradient;
 	ctx.fillRect(0, 0, 1920, 1080);
 
-	const redditLogo = await loadImage(path.join(__dirname, "../media/reddit-logo.png"));
-	ctx.drawImage(redditLogo, 1080, canvas.height / 2 - 400, 800, 800);
+	ctx.drawImage(await loadImage(logoPath), 1080, canvas.height / 2 - 400, 800, 800);
 
-	const subredditJson = await fetch(`https://www.reddit.com/r/${subreddit}/about.json`);
-	const subredditData = await subredditJson.json();
-
-	const iconURL = subredditData.data.icon_img
-		? subredditData.data.icon_img
-		: path.join(__dirname, "../media/reddit-logo.png");
-	const subredditIcon = await loadImage(iconURL);
-	ctx.drawImage(subredditIcon, 30, 30, 100, 100);
+	ctx.drawImage(await loadImage(icon), 30, 30, 100, 100);
 
 	ctx.fillStyle = "#FFFFFF";
 	canvasTxt.font = "Impact";
