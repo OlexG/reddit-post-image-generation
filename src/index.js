@@ -1,27 +1,14 @@
-const Crawler = require("crawler");
 const fetch = require("node-fetch");
 const { generateImage } = require("./image");
 
-exports.generateImage = function (url, pathToSave) {
-	return new Promise((resolve, reject) => {
-		new Crawler({
-			maxConnections: 10,
-			async callback(error, res, done) {
-				if (error) {
-					reject(error);
-				} else {
-					const fullTitle = res.$("title").text();
-					const [title, subreddit] = fullTitle.split(":").map((s) => s.trim());
+exports.generateImage = async function (postId, pathToSave) {
+	let postInfo = await fetch(`https://www.reddit.com/comments/${postId}/.json`);
+	postInfo = await postInfo.json();
+	const { title, subreddit } = postInfo[0].data.children[0].data;
 
-					let icon = await fetch(`https://www.reddit.com/r/${subreddit}/about.json`);
-					icon = await icon.json();
-					icon = icon?.data?.icon_img;
+	let icon = await fetch(`https://www.reddit.com/r/${subreddit}/about.json`);
+	icon = await icon.json();
+	icon = icon.data?.icon_img;
 
-					await generateImage({ title, subreddit, icon }, pathToSave);
-					resolve();
-				}
-				done();
-			},
-		}).queue(url.trim());
-	});
+	await generateImage({ title, subreddit, icon }, pathToSave);
 };
