@@ -7,9 +7,9 @@ This was written in an hour or two so the code is... pretty bad.
 # Instructions
 
 ```js
-import { generateImage } from 'reddit-post-image-generation'
+import { generateImage } from "reddit-post-image-generation";
 
-generateImage(url, pathToSaveImage)
+generateImage(postId, outputPath);
 ```
 
-`url` is in the format `https://www.reddit.com/r/{subreddit}/comments/{somedata}`. You can get this by clicking on a post.
+`postId` can be found in the URL of a post. For example, in `https://www.reddit.com/r/AskReddit/comments/sxu1jr/dear_nonindians_of_reddit_what_is_the_first_thing/`, the post ID is `sxu1jr`.
