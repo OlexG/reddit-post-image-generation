@@ -31,7 +31,7 @@ async function generateImage({ title, subreddit, icon }, pathToSave) {
 
 	let textTitle = title;
 	if (title.length > 120) {
-		textTitle = `${textTitle.substring(0, 120)}...`;
+		textTitle = `${textTitle.substring(0, 117)}...`;
 	}
 
 	canvasTxt.drawText(ctx, textTitle, 100, canvas.height / 2 - 250, canvas.width / 2 - 200, 500);
