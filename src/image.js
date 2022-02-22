@@ -5,9 +5,9 @@ const fetch = require("node-fetch");
 const canvasTxt = require("canvas-txt").default;
 
 async function generateImage(title, subreddit, pathToSave) {
-	registerFont(path.join(__dirname, "../fonts/impact.ttf"), { family: "Impact" });
-	registerFont(path.join(__dirname, "../fonts/impact.ttf"), { family: "Impact Condensed" });
-	registerFont(path.join(__dirname, "../fonts/impact.ttf"), { family: "Impact Mono" });
+	const font = path.join(__dirname, "../fonts/impact.ttf");
+	registerFont(font, { family: "Impact" });
+
 	const canvas = createCanvas(1920, 1080);
 	const ctx = canvas.getContext("2d");
 
