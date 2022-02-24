@@ -6,7 +6,7 @@ const canvasTxt = require("canvas-txt").default;
 const logoPath = path.join(__dirname, "../media/reddit-logo.png");
 const fontPath = path.join(__dirname, "../fonts/impact.ttf");
 
-async function generateImage({ title, subreddit, icon }, pathToSave) {
+async function generateImage({ title, subreddit, icon, url_overridden_by_dest }, pathToSave) {
 	icon = icon ? icon : logoPath;
 
 	for (const family of ["Impact", "Impact Condensed", "Impact Mono"]) {
@@ -22,7 +22,7 @@ async function generateImage({ title, subreddit, icon }, pathToSave) {
 	ctx.fillStyle = gradient;
 	ctx.fillRect(0, 0, 1920, 1080);
 
-	ctx.drawImage(await loadImage(logoPath), 1080, canvas.height / 2 - 400, 800, 800);
+	ctx.drawImage(await loadImage(url_overridden_by_dest || logoPath), 1080, canvas.height / 2 - 400, 800, 800);
 
 	ctx.drawImage(await loadImage(icon), 30, 30, 100, 100);
 
