@@ -43,13 +43,8 @@ async function generateImage({ title, subreddit, icon }, pathToSave) {
 	canvasTxt.align = "left";
 	canvasTxt.drawText(ctx, `r/${subreddit}`, 150, 45, canvas.width / 2, 50);
 
-	return new Promise((resolve, reject) => {
-		const stream = canvas.createPNGStream();
-		stream.on("end", () => resolve());
-		stream.on("close", () => resolve());
-		stream.on("error", (err) => reject(err));
-		stream.pipe(fs.createWriteStream(pathToSave));
-	});
+	const buffer = canvas.toBuffer('image/png')
+  fs.writeFileSync(pathToSave, buffer)
 }
 
 module.exports = { generateImage };
