@@ -5,7 +5,7 @@ module.exports = function extractImage(postInfo) {
     return {includeImage: true, image: url_overridden_by_dest}
   } else if(media_metadata && !is_video) {
     // Look man, it works... don't ask me how
-    return {includeImage: true, image: media_metadata[gallery_data.items[0].media_id].s.u.split("amp;").join("")}
+    return {includeImage: true, image: media_metadata[Object.keys(media_metadata)[0]].s.u.split("amp;").join("")}
   }
 
   return {includeImage: false, image: null}

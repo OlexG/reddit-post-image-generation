@@ -1,3 +1,3 @@
 const { generateImage } = require("./src");
 
-generateImage("sy2slo", "./testing.png");
+generateImage("t1yoqz", "./testing.png");
