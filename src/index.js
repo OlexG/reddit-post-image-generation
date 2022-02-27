@@ -1,4 +1,5 @@
 const fetch = require("node-fetch");
+const extractImage = require("./extractImage");
 const { generateImage } = require("./image");
 
 exports.generateImage = async function (postId, pathToSave) {
@@ -10,5 +11,7 @@ exports.generateImage = async function (postId, pathToSave) {
 	icon = await icon.json();
 	icon = icon.data?.icon_img;
 
-	await generateImage({ title, subreddit, icon }, pathToSave);
+	const {includeImage, image} = extractImage(postInfo)
+
+	await generateImage({ title, subreddit, icon, includeImage, image }, pathToSave);
 };
